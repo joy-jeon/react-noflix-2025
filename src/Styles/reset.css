@@ -38,7 +38,7 @@ html {
     padding: 0;
 }
 #root {
-  padding: 20px;
+  padding: 30px 20px;
 }
 menu, ol, ul {
   list-style: none;

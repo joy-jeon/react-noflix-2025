@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { useNavigate, useMatch } from "react-router-dom";
 import { makeImagePath } from "../api";
+import { useEffect } from "react";
 
 const Title = styled.h1`
   display: flex;
@@ -33,7 +34,6 @@ const Card = styled(motion.div)`
   display: flex;
   align-items: flex-end;
   transform-origin: center;
-
   strong {
     padding: 10px 8px;
     font-size: 14px;
@@ -46,20 +46,22 @@ const Overlay = styled(motion.div)`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
   opacity: 0;
 `;
 
 const BigMovie = styled(motion.div)`
   position: absolute;
   width: 50vw;
-  max-height: 80vh;
   left: 0;
   right: 0;
   margin: 0 auto;
   border-radius: 15px;
   overflow: hidden;
   background-color: black;
+  padding-bottom: 20px;
+  box-shadow: 3px 6px 15px 0px rgba(0, 0, 0, 0.75);
   @media screen and (max-width: 768px) {
     width: 90vw;
   }
@@ -93,9 +95,6 @@ const Badge = styled.div`
   margin-block-end: 4px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0 20px;
-  &:last-child {
-    margin-bottom: 20px;
-  }
   span {
     font-weight: 700;
   }
@@ -109,16 +108,25 @@ const Close = styled(motion.button)`
   background: none;
   color: white;
   padding: 0;
+  cursor: pointer;
+
   svg {
     width: 20px;
     height: 20px;
+    background-color: #000;
+    border-radius: 50%;
+    box-shadow: 3px 6px 15px 0px rgba(0, 0, 0, 0.75);
   }
 `;
 
 const cardVariants = {
-  normal: { scale: 1 },
+  normal: {
+    scale: 1,
+    zIndex: 0,
+  },
   hover: {
-    scale: 1.1,
+    scale: 1.2,
+    zIndex: 1,
     transition: {
       type: "tween",
       duration: 0.3,
@@ -137,6 +145,19 @@ function Layout({ data, basePath, title }) {
     match?.params.movieId &&
     data?.results.find((m) => String(m.id) === match.params.movieId);
 
+  const isModalOpen = match && clickedMovie;
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
   return (
     <>
       <Title>{title}</Title>
