@@ -139,7 +139,7 @@ function Layout({ data, basePath, title }) {
   const match = useMatch(`${basePath}/:movieId`);
   const { scrollY } = useScroll();
   const onCardClick = (movieId) => navigate(`${basePath}/${movieId}`);
-  const onOverlayClick = () => navigate(basePath);
+  const onOverlayClick = () => navigate(basePath || "/");
 
   const clickedMovie =
     match?.params.movieId &&
