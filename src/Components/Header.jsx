@@ -37,28 +37,39 @@ const Circle = styled(motion.span)`
   left: 50%;
   border-radius: 50%;
 `;
+
 function Header() {
   const popularMatch = useMatch("/");
-  const nowPlayingMatch = useMatch("/now-playing");
   const comingSoonMatch = useMatch("/coming-soon");
+  const nowPlayingMatch = useMatch("/now-playing");
 
   return (
     <Gnb>
       <nav>
-        <AnimatePresence>
-          <Link to="/">
-            Popular
-            {popularMatch?.pathname && <Circle layoutId="navIndicator" />}
-          </Link>
-          <Link to="/coming-soon">
-            Coming Soon
-            {comingSoonMatch?.pathname && <Circle layoutId="navIndicator" />}
-          </Link>
-          <Link to="/now-playing">
-            Now Playing
-            {nowPlayingMatch?.pathname && <Circle layoutId="navIndicator" />}
-          </Link>
-        </AnimatePresence>
+        <Link to="/">
+          Popular
+          {popularMatch && (
+            <AnimatePresence mode="wait">
+              <Circle layoutId="navIndicator" />
+            </AnimatePresence>
+          )}
+        </Link>
+        <Link to="/coming-soon">
+          Coming Soon
+          {comingSoonMatch && (
+            <AnimatePresence mode="wait">
+              <Circle layoutId="navIndicator" />
+            </AnimatePresence>
+          )}
+        </Link>
+        <Link to="/now-playing">
+          Now Playing
+          {nowPlayingMatch && (
+            <AnimatePresence mode="wait">
+              <Circle layoutId="navIndicator" />
+            </AnimatePresence>
+          )}
+        </Link>
       </nav>
     </Gnb>
   );

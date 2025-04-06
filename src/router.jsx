@@ -14,11 +14,23 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: ":popularId",
+        element: <Home />,
+      },
+      {
         path: "/coming-soon",
         element: <ComingSoon />,
       },
       {
+        path: "/coming-soon/:movieId",
+        element: <ComingSoon />,
+      },
+      {
         path: "/now-playing",
+        element: <NowPlaying />,
+      },
+      {
+        path: "/now-playing/:movieId",
         element: <NowPlaying />,
       },
     ],
