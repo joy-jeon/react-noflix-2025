@@ -19,6 +19,8 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: Noto Sans, sans-serif;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -34,6 +36,9 @@ body,
 html {
     margin: 0;
     padding: 0;
+}
+#root {
+  padding: 20px 0;
 }
 menu, ol, ul {
   list-style: none;
@@ -58,6 +63,8 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   color:black;
   line-height: 1.2;
+  background-color: #212121
+  ;
 }
 a {
   text-decoration:none;

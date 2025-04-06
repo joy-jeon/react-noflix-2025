@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPopular } from "../api";
+import styled from "styled-components";
+import "../Styles/card.css";
 
 function Home() {
   const { data, isLoading } = useQuery(["popular"], getPopular);
